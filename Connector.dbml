@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FinacialManagementDB" Class="ConnectorDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MREMZA\SQLEXPRESS;Initial Catalog=FinacialManagementDB;Integrated Security=True;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FinacialManagementDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Budget" Member="Budgets">
+    <Type Name="Budget">
+      <Column Name="Budget_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Budget_Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Budget_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Budget_startdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Budget_enddate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Total_income" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Budget_Expense" Member="Expenses" ThisKey="Budget_ID" OtherKey="Budget_ID" Type="Expense" />
+      <Association Name="End_User_Budget" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomGoalSaving" Member="CustomGoalSavings">
+    <Type Name="CustomGoalSaving">
+      <Column Name="Custom_Goal_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Custom_Goal_Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Custom_Goal_Target_Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Custom_Goal_Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Custom_Goal_Contribution_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Custom_Goal_Due_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="End_User_CustomGoalSaving" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Debts" Member="Debts">
+    <Type Name="Debt">
+      <Column Name="Debt_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Debt_description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Debt_type" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Debt_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Payment_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Debt_Notification" Member="Notifications" ThisKey="Debt_ID" OtherKey="Debt_ID" Type="Notification" />
+      <Association Name="End_User_Debt" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EducationSaving" Member="EducationSavings">
+    <Type Name="EducationSaving">
+      <Column Name="Education_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Education_Institution" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Education_Course" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Education_Start_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Education_End_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Education_Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Education_Cost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Education_Contribution_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Education_Start_Save_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Education_End_Save_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="End_User_EducationSaving" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Emergency_saving" Member="Emergency_savings">
+    <Type Name="Emergency_saving">
+      <Column Name="Em_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Em_saving_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Em_saving_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Em_saving_startdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Em_saving_enddate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Em_saving_type" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Emergency_saving_Notification" Member="Notifications" ThisKey="Em_ID" OtherKey="Em_saving_ID" Type="Notification" />
+      <Association Name="End_User_Emergency_saving" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmergencySaving" Member="EmergencySavings">
+    <Type Name="EmergencySaving">
+      <Column Name="Emergency_Save_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Emergency_Save_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Emergency_Save_Target_Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Emergency_Save_Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Emergency_Save_Contribution_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="End_User_EmergencySaving" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.End_User" Member="End_Users">
+    <Type Name="End_User">
+      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="First_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Last_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="End_User_Budget" Member="Budgets" ThisKey="User_ID" OtherKey="User_ID" Type="Budget" />
+      <Association Name="End_User_CustomGoalSaving" Member="CustomGoalSavings" ThisKey="User_ID" OtherKey="User_ID" Type="CustomGoalSaving" />
+      <Association Name="End_User_Debt" Member="Debts" ThisKey="User_ID" OtherKey="User_ID" Type="Debt" />
+      <Association Name="End_User_EducationSaving" Member="EducationSavings" ThisKey="User_ID" OtherKey="User_ID" Type="EducationSaving" />
+      <Association Name="End_User_Emergency_saving" Member="Emergency_savings" ThisKey="User_ID" OtherKey="User_ID" Type="Emergency_saving" />
+      <Association Name="End_User_EmergencySaving" Member="EmergencySavings" ThisKey="User_ID" OtherKey="User_ID" Type="EmergencySaving" />
+      <Association Name="End_User_Personal_saving" Member="Personal_savings" ThisKey="User_ID" OtherKey="User_ID" Type="Personal_saving" />
+      <Association Name="End_User_Transaction" Member="Transactions" ThisKey="User_ID" OtherKey="User_ID" Type="Transaction" />
+      <Association Name="End_User_TravelSaving" Member="TravelSavings" ThisKey="User_ID" OtherKey="User_ID" Type="TravelSaving" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Expense" Member="Expenses">
+    <Type Name="Expense">
+      <Column Name="Expense_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Expense_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Expensepur_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Expense_price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="[Expense priority]" Member="Expense_priority" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Expense_startdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Expense_enddate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Budget_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Spending_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Budget_Expense" Member="Budget" ThisKey="Budget_ID" OtherKey="Budget_ID" Type="Budget" IsForeignKey="true" />
+      <Association Name="Spending_Expense" Member="Spending" ThisKey="Spending_ID" OtherKey="Spending_ID" Type="Spending" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notification" Member="Notifications">
+    <Type Name="Notification">
+      <Column Name="Notification_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Notification_time" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="Notification_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Debt_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Em_saving_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="P_saving_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Spending_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Debt_Notification" Member="Debt" ThisKey="Debt_ID" OtherKey="Debt_ID" Type="Debt" IsForeignKey="true" />
+      <Association Name="Emergency_saving_Notification" Member="Emergency_saving" ThisKey="Em_saving_ID" OtherKey="Em_ID" Type="Emergency_saving" IsForeignKey="true" />
+      <Association Name="Personal_saving_Notification" Member="Personal_saving" ThisKey="P_saving_ID" OtherKey="P_saving_ID" Type="Personal_saving" IsForeignKey="true" />
+      <Association Name="Spending_Notification" Member="Spending" ThisKey="Spending_ID" OtherKey="Spending_ID" Type="Spending" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Personal_saving" Member="Personal_savings">
+    <Type Name="Personal_saving">
+      <Column Name="P_saving_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="P_saving_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="P_saving_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="P_saving_startdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="P_saving_enddate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="P_saving_type" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Personal_saving_Notification" Member="Notifications" ThisKey="P_saving_ID" OtherKey="P_saving_ID" Type="Notification" />
+      <Association Name="End_User_Personal_saving" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Spending" Member="Spendings">
+    <Type Name="Spending">
+      <Column Name="Spending_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Spent_expense" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Spending_description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Spending_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Spending_Expense" Member="Expenses" ThisKey="Spending_ID" OtherKey="Spending_ID" Type="Expense" />
+      <Association Name="Spending_Notification" Member="Notifications" ThisKey="Spending_ID" OtherKey="Spending_ID" Type="Notification" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Table]" Member="Tables">
+    <Type Name="Table">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Transaction]" Member="Transactions">
+    <Type Name="Transaction">
+      <Column Name="Trans_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Trans_description" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Trans_amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Trans_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="End_User_Transaction" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TravelSaving" Member="TravelSavings">
+    <Type Name="TravelSaving">
+      <Column Name="Travel_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Travel_Destination" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Travel_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Travel_Duration" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Travel_Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Travel_Number_of_Travelers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Travel_Target_Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Travel_Start_Save_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Travel_End_Save_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Travel_Contribution_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="End_User_TravelSaving" Member="End_User" ThisKey="User_ID" OtherKey="User_ID" Type="End_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
