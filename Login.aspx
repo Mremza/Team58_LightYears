@@ -133,6 +133,7 @@
                     <asp:Button ID="btnRegister" runat="server" Text="Register" ForeColor="Black" />
                 </td>
                 <td>&nbsp;</td>
+		    
             </tr>
             <tr>
                 <td class="auto-style6">&nbsp;</td>
